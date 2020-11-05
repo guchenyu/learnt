@@ -70,6 +70,7 @@ public class HomeworkController {
         for(Book book:bookService.findAllBooks()){
             if(book.getCallnumber().equals("Call123")) {
                 c++;
+
             }
         }
         count=c;
