@@ -5,6 +5,8 @@ import org.scu_db.demo.model.Title;
 import java.util.List;
 
 public interface TitleService {
-
+    List<Title> findAllTitles();
+    Title findTitleBycallnumber(Integer callnumber);
+    List<Title> findTitleBycallnumberUseSql(Integer callnumber);
 
 }

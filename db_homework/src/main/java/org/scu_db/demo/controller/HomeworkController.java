@@ -1,5 +1,6 @@
 package org.scu_db.demo.controller;
 
+import org.scu_db.demo.Repository.BookRepository;
 import org.scu_db.demo.model.Book;
 import org.scu_db.demo.model.Member;
 import org.scu_db.demo.model.Title;
@@ -31,11 +32,13 @@ public class HomeworkController {
         List<Integer> bookId;
 
         //------------在此之下写下执行代码--------------
-
-
-
+        bookId=new LinkedList<>();
+        for(Book book:bookService.findAllBooks()){
+            if(book.getBorrowduedate()!=null)
+                bookId.add(book.getBookId());
+        }
         //-----------在此之上写下执行代码---------------
-        return null;//TODO:修改返回值为bookId
+        return bookId;
     }
 
     @RequestMapping("/2")
@@ -45,11 +48,15 @@ public class HomeworkController {
         List<Title> titles;
 
         //------------在此之下写下执行代码--------------
-
-
+        titles=new LinkedList<>();
+        for(Title title:titleService.findAllTitles()){
+            if(title.getName().equals("Odyssey")||title.getName().equals("Iliad")){
+                titles.add(title);
+            }
+        }
 
         //-----------在此之上写下执行代码---------------
-        return null;//TODO:修改返回值为titles
+        return titles;//TODO:修改返回值为titles
     }
 
 
@@ -58,13 +65,16 @@ public class HomeworkController {
         //TODO:请完成相关代码实现下述查询要求：
         //查询callnumber为”Call123”的图书有多少本。(对应第5题)
         Integer count;
-
         //------------在此之下写下执行代码--------------
-
-
-
+        int c=0;
+        for(Book book:bookService.findAllBooks()){
+            if(book.getCallnumber().equals("Call123")) {
+                c++;
+            }
+        }
+        count=c;
         //-----------在此之上写下执行代码---------------
-        return null;//TODO:修改返回值为books
+        return count;//TODO:修改返回值为books
     }
 
     @RequestMapping("/4")
