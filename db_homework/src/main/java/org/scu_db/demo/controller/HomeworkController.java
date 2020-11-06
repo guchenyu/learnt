@@ -10,6 +10,7 @@ import org.scu_db.demo.service.TitleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -82,12 +83,30 @@ public class HomeworkController {
     public List<String> homework4(){
         //TODO:请完成相关代码实现下述查询要求：
         //查询本数不超过2本的图书的callnumber号。(对应第7题)
-        List<String> callnumbers;
+        List<String> callnumbers ;
         //------------在此之下写下执行代码--------------
-
-
+        callnumbers=new LinkedList<>();
+        HashMap<String,Integer> map=new HashMap<String, Integer>();
+        for(Book book:bookService.findAllBooks()){
+            int flag=0;
+            for(String key:map.keySet()){
+                if(key.equals(book.getCallnumber())){
+                    map.put(key,map.get(key)+1);
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag==0){//如果没有在map中找到相同键
+                map.put(book.getCallnumber(),1);//则将对应键和键值插入到map中
+            }
+        }
+        for(String key:map.keySet()){
+            if(map.get(key)<=2){
+                callnumbers.add(key);
+            }
+        }
         //-----------在此之上写下执行代码---------------
-        return null;//TODO:修改返回值为books
+        return callnumbers;//TODO:修改返回值为books
     }
 
 
